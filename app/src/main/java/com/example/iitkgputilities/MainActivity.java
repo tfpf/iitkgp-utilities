@@ -16,6 +16,8 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -217,6 +219,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void proceed_csemoodle(View view) {
+        for(int i = 0; i < ((ConstraintLayout)findViewById(R.id.test)).getChildCount() - 1; ++i)
+        {
+            ((ConstraintLayout)findViewById(R.id.test)).getChildAt(i).setVisibility(View.GONE);
+        }
+        findViewById(R.id.wv_csemoodle).setVisibility(View.VISIBLE);
         WebView wv = (WebView)findViewById(R.id.wv_csemoodle);
         WebSettings settings = wv.getSettings();
         settings.setCacheMode(WebSettings.LOAD_NO_CACHE);
