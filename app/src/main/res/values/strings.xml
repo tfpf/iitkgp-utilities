@@ -8,6 +8,6 @@
     <string name="action_settings">Settings</string>
 
     <string name="menu_home">ERP</string>
-    <string name="menu_gallery">Moodle</string>
-    <string name="menu_slideshow">Moodle (New)</string>
+    <string name="menu_gallery">Institute Moodle</string>
+    <string name="menu_slideshow">CSE Moodle</string>
 </resources>

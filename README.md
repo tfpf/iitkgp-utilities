@@ -1,2 +1,4 @@
 # IIT Kharagpur Utilities
-Automatically logs in to some portals. Work in progress!
+Android application which speeds up logging in to some IITKGP portals.
+
+Work in progress! Commits may disappear or be squashed at any time.

@@ -215,4 +215,18 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+    public void proceed_csemoodle(View view) {
+        WebView wv = (WebView)findViewById(R.id.wv_csemoodle);
+        WebSettings settings = wv.getSettings();
+        settings.setCacheMode(WebSettings.LOAD_NO_CACHE);
+        settings.setDomStorageEnabled(true);
+        settings.setJavaScriptEnabled(true);
+        settings.setLoadWithOverviewMode(true);
+        settings.setUseWideViewPort(true);
+        wv.loadUrl("https:www.google.com");
+    }
+
+    public void save_csemoodle(View view) {
+    }
 }
