@@ -218,21 +218,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    // public void proceed(WebView wv, )
-
-    /*public void proceed_csemoodle(View view)
-    {
-        findViewById(R.id.wv_csemoodle).setVisibility(View.VISIBLE);
-        WebView wv = (WebView)findViewById(R.id.wv_csemoodle);
-        WebSettings settings = wv.getSettings();
-        settings.setCacheMode(WebSettings.LOAD_NO_CACHE);
-        settings.setDomStorageEnabled(true);
-        settings.setJavaScriptEnabled(true);
-        settings.setLoadWithOverviewMode(true);
-        settings.setUseWideViewPort(true);
-        wv.loadUrl("https://moodlecse.iitkgp.ac.in/moodle/login/index.php");
-    }*/
-
     // CSE Moodle.
     public void save_csemoodle(View view)
     {
@@ -240,7 +225,7 @@ public class MainActivity extends AppCompatActivity {
     }
     public void proceed_csemoodle(View view)
     {
-        proceed(Constants.csemoodle, findViewById(R.id.wv_csemoodle), "https://moodlecse.iitkgp.ac.in/moodle/login/index.php");
+        proceed(Constants.csemoodle, findViewById(R.id.wv_csemoodle), "https://moodlecse.iitkgp.ac.in/moodle/login/index.php", "username", "password", "loginbtn", true);
     }
 
     /***********************************************************************************************
@@ -261,13 +246,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /***********************************************************************************************
-     * Log in to a website.
+     * Enter the user's credentials on the login page.
      *
      * @param name Name of the shared preferences file to read the credentials from.
      * @param wv View to load the login page in.
      * @param url Address of the login page.
+     * @param uid_id HTML ID of the field to enter the user ID into.
+     * @param pw_id HTML ID of the field to enter the password into.
+     * @param btn_id HTML ID of the button which logs the user in.
+     * @param log_in Whether or not to click the above button.
      **********************************************************************************************/
-    public void proceed(String name, WebView wv, String url)
+    public void proceed(String name, WebView wv, String url, String uid_id, String pw_id, String btn_id, boolean log_in)
     {
         SharedPreferences preferences = getSharedPreferences(name, MODE_PRIVATE);
         String uid = preferences.getString("uid", "");
@@ -278,14 +267,30 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        wv.setVisibility(View.VISIBLE);
-        WebSettings settings = wv.getSettings();
-        settings.setCacheMode(WebSettings.LOAD_NO_CACHE);
-        settings.setDomStorageEnabled(true);
-        settings.setJavaScriptEnabled(true);
-        settings.setLoadWithOverviewMode(true);
-        settings.setUseWideViewPort(true);
-        wv.loadUrl(url);
+        load_page(wv, url);
+        wv.setWebViewClient(new WebViewClient()
+        {
+            private boolean attempted = false;
+            public boolean shouldOverrideUrlLoading(WebView wv, String url)
+            {
+                wv.loadUrl(url);
+                return true;
+            }
+            public void onPageFinished(WebView wv, String url)
+            {
+                // Try to log in only once. A flurry of attempts may be flagged as a DoS attack.
+                if(!attempted)
+                {
+                    attempted = true;
+                    wv.loadUrl("javascript:(function() { document.getElementById('" + uid_id + "').value = '" + uid + "'; ;})()");
+                    wv.loadUrl("javascript:(function() { document.getElementById('" + pw_id + "').value = '" + pw + "'; ;})()");
+                    if(log_in)
+                    {
+                        wv.postDelayed(() -> wv.loadUrl("javascript:document.getElementById('" + btn_id + "').click();"), 1000);
+                    }
+                }
+            }
+        });
     }
 
     /***********************************************************************************************
@@ -298,5 +303,23 @@ public class MainActivity extends AppCompatActivity {
         dialog.setMessage("User ID or password not provided");
         dialog.setPositiveButton("OK", null);
         dialog.show();
+    }
+
+    /***********************************************************************************************
+     * Load a webpage.
+     *
+     * @param wv View to load the webpage in.
+     * @param url Address of the webpage.
+     **********************************************************************************************/
+    public void load_page(WebView wv, String url)
+    {
+        wv.setVisibility(View.VISIBLE);
+        WebSettings settings = wv.getSettings();
+        settings.setCacheMode(WebSettings.LOAD_NO_CACHE);
+        settings.setDomStorageEnabled(true);
+        settings.setJavaScriptEnabled(true);
+        settings.setLoadWithOverviewMode(true);
+        settings.setUseWideViewPort(true);
+        wv.loadUrl(url);
     }
 }
