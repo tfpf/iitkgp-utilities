@@ -218,11 +218,10 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void proceed_csemoodle(View view) {
-        for(int i = 0; i < ((ConstraintLayout)findViewById(R.id.test)).getChildCount() - 1; ++i)
-        {
-            ((ConstraintLayout)findViewById(R.id.test)).getChildAt(i).setVisibility(View.GONE);
-        }
+    // public void proceed(WebView wv, )
+
+    /*public void proceed_csemoodle(View view)
+    {
         findViewById(R.id.wv_csemoodle).setVisibility(View.VISIBLE);
         WebView wv = (WebView)findViewById(R.id.wv_csemoodle);
         WebSettings settings = wv.getSettings();
@@ -231,9 +230,73 @@ public class MainActivity extends AppCompatActivity {
         settings.setJavaScriptEnabled(true);
         settings.setLoadWithOverviewMode(true);
         settings.setUseWideViewPort(true);
-        wv.loadUrl("https:www.google.com");
+        wv.loadUrl("https://moodlecse.iitkgp.ac.in/moodle/login/index.php");
+    }*/
+
+    // CSE Moodle.
+    public void save_csemoodle(View view)
+    {
+        save(Constants.csemoodle, findViewById(R.id.uid_csemoodle), findViewById(R.id.pw_csemoodle));
+    }
+    public void proceed_csemoodle(View view)
+    {
+        proceed(Constants.csemoodle, findViewById(R.id.wv_csemoodle), "https://moodlecse.iitkgp.ac.in/moodle/login/index.php");
     }
 
-    public void save_csemoodle(View view) {
+    /***********************************************************************************************
+     * Save the user's credentials.
+     *
+     * @param name Name of the shared preferences file to write the credentials to.
+     * @param uid_view View containing the user ID.
+     * @param pw_view View containing the password.
+     **********************************************************************************************/
+    public void save(String name, TextView uid_view, TextView pw_view)
+    {
+        SharedPreferences preferences = getSharedPreferences(name, MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("uid", uid_view.getText().toString());
+        editor.putString("pw", pw_view.getText().toString());
+        editor.apply();
+        Toast.makeText(MainActivity.this, "Saved", Toast.LENGTH_SHORT).show();
+    }
+
+    /***********************************************************************************************
+     * Log in to a website.
+     *
+     * @param name Name of the shared preferences file to read the credentials from.
+     * @param wv View to load the login page in.
+     * @param url Address of the login page.
+     **********************************************************************************************/
+    public void proceed(String name, WebView wv, String url)
+    {
+        SharedPreferences preferences = getSharedPreferences(name, MODE_PRIVATE);
+        String uid = preferences.getString("uid", "");
+        String pw = preferences.getString("pw", "");
+        if(uid.isEmpty() || pw.isEmpty())
+        {
+            error_no_uid_pw();
+            return;
+        }
+
+        wv.setVisibility(View.VISIBLE);
+        WebSettings settings = wv.getSettings();
+        settings.setCacheMode(WebSettings.LOAD_NO_CACHE);
+        settings.setDomStorageEnabled(true);
+        settings.setJavaScriptEnabled(true);
+        settings.setLoadWithOverviewMode(true);
+        settings.setUseWideViewPort(true);
+        wv.loadUrl(url);
+    }
+
+    /***********************************************************************************************
+     * Display an error about a missing user ID or password.
+     **********************************************************************************************/
+    public void error_no_uid_pw()
+    {
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        dialog.setTitle("Error");
+        dialog.setMessage("User ID or password not provided");
+        dialog.setPositiveButton("OK", null);
+        dialog.show();
     }
 }
