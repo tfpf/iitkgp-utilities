@@ -93,7 +93,9 @@ public class MainActivity extends AppCompatActivity {
     }
     public void proceed_erp(View view)
     {
-        proceed(Constants.erp, findViewById(R.id.wv_erp), "https://erp.iitkgp.ac.in/SSOAdministration/login.htm?requestedUrl=https://erp.iitkgp.ac.in/IIT_ERP3/home.htm", "user_id", "password", "loginFormSubmitButton", false);
+        WebView wv = findViewById(R.id.wv_erp);
+        proceed(Constants.erp, wv, "https://erp.iitkgp.ac.in/SSOAdministration/login.htm?requestedUrl=https://erp.iitkgp.ac.in/IIT_ERP3/home.htm", "user_id", "password", "loginFormSubmitButton", false);
+        wv.postDelayed(() -> wv.loadUrl("javascript:document.getElementById('answer').focus();"), 3000);
     }
 
     /***********************************************************************************************
