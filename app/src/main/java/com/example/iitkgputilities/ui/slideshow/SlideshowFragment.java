@@ -18,9 +18,9 @@ import com.example.iitkgputilities.databinding.FragmentSlideshowBinding;
 
 import org.w3c.dom.Text;
 
-public class SlideshowFragment extends Fragment {
-
-private FragmentSlideshowBinding binding;
+public class SlideshowFragment extends Fragment
+{
+    private FragmentSlideshowBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {

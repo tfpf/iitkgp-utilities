@@ -11,36 +11,32 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.iitkgputilities.Constants;
 import com.example.iitkgputilities.R;
 import com.example.iitkgputilities.databinding.FragmentGalleryBinding;
 
-public class GalleryFragment extends Fragment {
-
-private FragmentGalleryBinding binding;
+public class GalleryFragment extends Fragment
+{
+    private FragmentGalleryBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        GalleryViewModel galleryViewModel = new ViewModelProvider(this).get(GalleryViewModel.class);
         binding = FragmentGalleryBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         return root;
     }
 
-    /***********************************************************************************************
-     * Load credentials.
-     **********************************************************************************************/
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState)
     {
-        SharedPreferences preferences = requireContext().getSharedPreferences("iitkgp-utilities-moodle", Context.MODE_PRIVATE);
-        String uid = preferences.getString("uid", "");
-        ((TextView)view.findViewById(R.id.uid_moodle)).setText(uid);
-        String pw = preferences.getString("pw", "");
-        ((TextView)view.findViewById(R.id.pw_moodle)).setText(pw);
+        SharedPreferences preferences = requireContext().getSharedPreferences(Constants.moodle, Context.MODE_PRIVATE);
+        ((TextView)view.findViewById(R.id.uid_moodle)).setText(preferences.getString("uid", ""));
+        ((TextView)view.findViewById(R.id.pw_moodle)).setText(preferences.getString("pw", ""));
     }
 
     @Override
-    public void onDestroyView() {
+    public void onDestroyView()
+    {
         super.onDestroyView();
         binding = null;
     }

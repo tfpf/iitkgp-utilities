@@ -5,4 +5,6 @@ package com.example.iitkgputilities;
 public class Constants
 {
     public static final String csemoodle = "iitkgp-utilities-csemoodle";
+    public static final String moodle    = "iitkgp-utilities-moodle";
+    public static final String erp       = "iitkgp-utilities-erp";
 }

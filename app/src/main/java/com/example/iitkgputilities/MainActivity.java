@@ -66,158 +66,6 @@ public class MainActivity extends AppCompatActivity {
                 || super.onSupportNavigateUp();
     }
 
-    /***********************************************************************************************
-     * Save credentials.
-     **********************************************************************************************/
-    public void save_erp(View view)
-    {
-        SharedPreferences preferences = getSharedPreferences("iitkgp-utilities-erp", MODE_PRIVATE);
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putString("uid", ((TextView)findViewById(R.id.uid_erp)).getText().toString());
-        editor.putString("pw", ((TextView)findViewById(R.id.pw_erp)).getText().toString());
-        editor.apply();
-        Toast.makeText(MainActivity.this, "Saved", Toast.LENGTH_SHORT).show();
-    }
-
-    /***********************************************************************************************
-     * Open login page.
-     **********************************************************************************************/
-    public void proceed_erp(View view)
-    {
-        SharedPreferences preferences = getSharedPreferences("iitkgp-utilities-erp", MODE_PRIVATE);
-        String uid = preferences.getString("uid", "");
-        String pw = preferences.getString("pw", "");
-        if(uid.isEmpty() || pw.isEmpty())
-        {
-            AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-            dialog.setTitle("Error");
-            dialog.setMessage("User ID or password not provided");
-            dialog.setPositiveButton("OK", null);
-            dialog.show();
-            return;
-        }
-
-        String login_url = "https://erp.iitkgp.ac.in/SSOAdministration/login.htm?requestedUrl=https://erp.iitkgp.ac.in/IIT_ERP3/home.htm";
-        WebView wv = new WebView(MainActivity.this);
-        setContentView(wv);
-        WebSettings settings = wv.getSettings();
-        settings.setCacheMode(WebSettings.LOAD_NO_CACHE);
-        settings.setDomStorageEnabled(true);
-        settings.setJavaScriptEnabled(true);
-        settings.setLoadWithOverviewMode(true);
-        settings.setUseWideViewPort(true);
-        wv.loadUrl(login_url);
-
-        // Type credentials.
-        wv.setWebViewClient(new WebViewClient()
-        {
-            public boolean shouldOverrideUrlLoading(WebView wv, String url)
-            {
-                if(url.startsWith("https://erp.iitkgp.ac.in"))
-                {
-                    wv.loadUrl(url);
-                    return true;
-                }
-                return false;
-            }
-            public void onPageFinished(WebView wv, String url)
-            {
-                if(!url.equals(login_url))
-                {
-                    return;
-                }
-                wv.loadUrl("javascript:(function() { document.getElementById('user_id').value = '" + uid + "'; ;})()");
-                wv.loadUrl("javascript:(function() { document.getElementById('password').value = '" + pw + "'; ;})()");
-                wv.requestFocus(View.FOCUS_DOWN);
-                wv.loadUrl("javascript:document.getElementById('password').focus();");
-
-                // Focusing away from the user ID entry causes a new entry to appear. Wait for some
-                // time and focus on said entry.
-                wv.postDelayed(new Runnable()
-                {
-                    @Override
-                    public void run()
-                    {
-                        wv.loadUrl("javascript:document.getElementById('answer').focus();");
-                    }
-                }, 1000);
-            }
-        });
-    }
-
-    /***********************************************************************************************
-     * Save credentials.
-     **********************************************************************************************/
-    public void save_moodle(View view)
-    {
-        SharedPreferences preferences = getSharedPreferences("iitkgp-utilities-moodle", MODE_PRIVATE);
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putString("uid", ((TextView)findViewById(R.id.uid_moodle)).getText().toString());
-        editor.putString("pw", ((TextView)findViewById(R.id.pw_moodle)).getText().toString());
-        editor.apply();
-        Toast.makeText(MainActivity.this, "Saved", Toast.LENGTH_SHORT).show();
-    }
-
-    /***********************************************************************************************
-     * Open login page.
-     **********************************************************************************************/
-    public void proceed_moodle(View view)
-    {
-        SharedPreferences preferences = getSharedPreferences("iitkgp-utilities-moodle", MODE_PRIVATE);
-        String uid = preferences.getString("uid", "");
-        String pw = preferences.getString("pw", "");
-        if(uid.isEmpty() || pw.isEmpty())
-        {
-            AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-            dialog.setTitle("Error");
-            dialog.setMessage("User ID or password not provided");
-            dialog.setPositiveButton("OK", null);
-            dialog.show();
-            return;
-        }
-
-        String login_url = "http://kgpmoodlenew.iitkgp.ac.in/moodle/login/index.php";
-        WebView wv = new WebView(MainActivity.this);
-        setContentView(wv);
-        WebSettings settings = wv.getSettings();
-        settings.setCacheMode(WebSettings.LOAD_NO_CACHE);
-        settings.setDomStorageEnabled(true);
-        settings.setJavaScriptEnabled(true);
-        settings.setLoadWithOverviewMode(true);
-        settings.setUseWideViewPort(true);
-        wv.loadUrl(login_url);
-
-        // Type credentials.
-        wv.setWebViewClient(new WebViewClient()
-        {
-            public boolean shouldOverrideUrlLoading(WebView wv, String url)
-            {
-                if(url.startsWith("http://kgpmoodlenew.iitkgp.ac.in"))
-                {
-                    wv.loadUrl(url);
-                    return true;
-                }
-                return false;
-            }
-            public void onPageFinished(WebView wv, String url)
-            {
-                if(!url.equals(login_url))
-                {
-                    return;
-                }
-                wv.loadUrl("javascript:(function() { document.getElementById('username').value = '" + uid + "'; ;})()");
-                wv.loadUrl("javascript:(function() { document.getElementById('password').value = '" + pw + "'; ;})()");
-                wv.postDelayed(new Runnable() {
-                    @Override
-                    public void run()
-                    {
-                        wv.loadUrl("javascript:document.getElementById('loginbtn').click();");
-                    }
-                }, 1000);
-            }
-        });
-    }
-
     // CSE Moodle.
     public void save_csemoodle(View view)
     {
@@ -226,6 +74,26 @@ public class MainActivity extends AppCompatActivity {
     public void proceed_csemoodle(View view)
     {
         proceed(Constants.csemoodle, findViewById(R.id.wv_csemoodle), "https://moodlecse.iitkgp.ac.in/moodle/login/index.php", "username", "password", "loginbtn", true);
+    }
+
+    // Institute Moodle.
+    public void save_moodle(View view)
+    {
+        save(Constants.moodle, findViewById(R.id.uid_moodle), findViewById(R.id.pw_moodle));
+    }
+    public void proceed_moodle(View view)
+    {
+        proceed(Constants.moodle, findViewById(R.id.wv_moodle), "http://kgpmoodlenew.iitkgp.ac.in/moodle/login/index.php", "username", "password", "loginbtn", true);
+    }
+
+    // ERP.
+    public void save_erp(View view)
+    {
+        save(Constants.erp, findViewById(R.id.uid_erp), findViewById(R.id.pw_erp));
+    }
+    public void proceed_erp(View view)
+    {
+        proceed(Constants.erp, findViewById(R.id.wv_erp), "https://erp.iitkgp.ac.in/SSOAdministration/login.htm?requestedUrl=https://erp.iitkgp.ac.in/IIT_ERP3/home.htm", "user_id", "password", "loginFormSubmitButton", false);
     }
 
     /***********************************************************************************************
@@ -284,6 +152,11 @@ public class MainActivity extends AppCompatActivity {
                     attempted = true;
                     wv.loadUrl("javascript:(function() { document.getElementById('" + uid_id + "').value = '" + uid + "'; ;})()");
                     wv.loadUrl("javascript:(function() { document.getElementById('" + pw_id + "').value = '" + pw + "'; ;})()");
+
+                    // The security question is not displayed on the ERP login page unless the user
+                    // ID field is filled and the password field has focus.
+                    wv.requestFocus(View.FOCUS_DOWN);
+                    wv.loadUrl("javascript:document.getElementById('" + pw_id + "').focus();");
                     if(log_in)
                     {
                         wv.postDelayed(() -> wv.loadUrl("javascript:document.getElementById('" + btn_id + "').click();"), 1000);
