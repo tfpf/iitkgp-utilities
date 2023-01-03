@@ -9,14 +9,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.example.iitkgputilities.Constants;
-import com.example.iitkgputilities.MainActivity;
 import com.example.iitkgputilities.R;
 import com.example.iitkgputilities.databinding.FragmentCsemoodleBinding;
-
-import org.w3c.dom.Text;
 
 public class CsemoodleFragment extends Fragment
 {
@@ -32,7 +28,7 @@ public class CsemoodleFragment extends Fragment
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState)
     {
-        SharedPreferences preferences = requireContext().getSharedPreferences(Constants.csemoodle, Context.MODE_PRIVATE);
+        SharedPreferences preferences = requireContext().getSharedPreferences(Constants.csemoodle_name, Context.MODE_PRIVATE);
         ((TextView)view.findViewById(R.id.uid_csemoodle)).setText(preferences.getString("uid", ""));
         ((TextView)view.findViewById(R.id.pw_csemoodle)).setText(preferences.getString("pw", ""));
     }

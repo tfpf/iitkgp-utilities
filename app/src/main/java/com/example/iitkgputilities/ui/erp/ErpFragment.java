@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.example.iitkgputilities.Constants;
 import com.example.iitkgputilities.R;
@@ -30,7 +29,7 @@ public class ErpFragment extends Fragment
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState)
     {
-        SharedPreferences preferences = requireContext().getSharedPreferences(Constants.erp, Context.MODE_PRIVATE);
+        SharedPreferences preferences = requireContext().getSharedPreferences(Constants.erp_name, Context.MODE_PRIVATE);
         ((TextView)view.findViewById(R.id.uid_erp)).setText(preferences.getString("uid", ""));
         ((TextView)view.findViewById(R.id.pw_erp)).setText(preferences.getString("pw", ""));
     }

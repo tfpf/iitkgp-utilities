@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.example.iitkgputilities.Constants;
 import com.example.iitkgputilities.R;
@@ -29,7 +28,7 @@ public class MoodleFragment extends Fragment
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState)
     {
-        SharedPreferences preferences = requireContext().getSharedPreferences(Constants.moodle, Context.MODE_PRIVATE);
+        SharedPreferences preferences = requireContext().getSharedPreferences(Constants.moodle_name, Context.MODE_PRIVATE);
         ((TextView)view.findViewById(R.id.uid_moodle)).setText(preferences.getString("uid", ""));
         ((TextView)view.findViewById(R.id.pw_moodle)).setText(preferences.getString("pw", ""));
     }

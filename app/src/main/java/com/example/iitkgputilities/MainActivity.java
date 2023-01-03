@@ -2,22 +2,17 @@ package com.example.iitkgputilities;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Menu;
-import android.view.ViewGroup;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.appcompat.app.AlertDialog;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -69,32 +64,32 @@ public class MainActivity extends AppCompatActivity {
     // CSE Moodle.
     public void save_csemoodle(View view)
     {
-        save(Constants.csemoodle, findViewById(R.id.uid_csemoodle), findViewById(R.id.pw_csemoodle));
+        save(Constants.csemoodle_name, findViewById(R.id.uid_csemoodle), findViewById(R.id.pw_csemoodle));
     }
     public void proceed_csemoodle(View view)
     {
-        proceed(Constants.csemoodle, findViewById(R.id.wv_csemoodle), "https://moodlecse.iitkgp.ac.in/moodle/login/index.php", "username", "password", "loginbtn", true);
+        proceed(Constants.csemoodle_name, findViewById(R.id.wv_csemoodle), Constants.csemoodle_url, "username", "password", "loginbtn", true);
     }
 
     // Institute Moodle.
     public void save_moodle(View view)
     {
-        save(Constants.moodle, findViewById(R.id.uid_moodle), findViewById(R.id.pw_moodle));
+        save(Constants.moodle_name, findViewById(R.id.uid_moodle), findViewById(R.id.pw_moodle));
     }
     public void proceed_moodle(View view)
     {
-        proceed(Constants.moodle, findViewById(R.id.wv_moodle), "http://kgpmoodlenew.iitkgp.ac.in/moodle/login/index.php", "username", "password", "loginbtn", true);
+        proceed(Constants.moodle_name, findViewById(R.id.wv_moodle), Constants.moodle_url, "username", "password", "loginbtn", true);
     }
 
     // ERP.
     public void save_erp(View view)
     {
-        save(Constants.erp, findViewById(R.id.uid_erp), findViewById(R.id.pw_erp));
+        save(Constants.erp_name, findViewById(R.id.uid_erp), findViewById(R.id.pw_erp));
     }
     public void proceed_erp(View view)
     {
         WebView wv = findViewById(R.id.wv_erp);
-        proceed(Constants.erp, wv, "https://erp.iitkgp.ac.in/SSOAdministration/login.htm?requestedUrl=https://erp.iitkgp.ac.in/IIT_ERP3/home.htm", "user_id", "password", "loginFormSubmitButton", false);
+        proceed(Constants.erp_name, wv, Constants.erp_url, "user_id", "password", "loginFormSubmitButton", false);
         wv.postDelayed(() -> wv.loadUrl("javascript:document.getElementById('answer').focus();"), 3000);
     }
 
