@@ -9,9 +9,9 @@
             android:icon="@drawable/ic_menu_csemoodle"
             android:title="@string/menu_csemoodle" />
         <item
-            android:id="@+id/nav_gallery"
+            android:id="@+id/nav_moodle"
             android:icon="@drawable/ic_menu_csemoodle"
-            android:title="@string/menu_gallery" />
+            android:title="@string/menu_moodle" />
         <item
             android:id="@+id/nav_home"
             android:icon="@drawable/ic_menu_csemoodle"

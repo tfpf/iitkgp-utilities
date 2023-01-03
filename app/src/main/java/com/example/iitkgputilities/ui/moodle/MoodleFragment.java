@@ -1,4 +1,4 @@
-package com.example.iitkgputilities.ui.gallery;
+package com.example.iitkgputilities.ui.moodle;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -13,15 +13,15 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.iitkgputilities.Constants;
 import com.example.iitkgputilities.R;
-import com.example.iitkgputilities.databinding.FragmentGalleryBinding;
+import com.example.iitkgputilities.databinding.FragmentMoodleBinding;
 
-public class GalleryFragment extends Fragment
+public class MoodleFragment extends Fragment
 {
-    private FragmentGalleryBinding binding;
+    private FragmentMoodleBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        binding = FragmentGalleryBinding.inflate(inflater, container, false);
+        binding = FragmentMoodleBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         return root;
     }
