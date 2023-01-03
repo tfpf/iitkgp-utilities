@@ -1,4 +1,4 @@
-package com.example.iitkgputilities.ui.home;
+package com.example.iitkgputilities.ui.erp;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -14,15 +14,15 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.iitkgputilities.Constants;
 import com.example.iitkgputilities.R;
-import com.example.iitkgputilities.databinding.FragmentHomeBinding;
+import com.example.iitkgputilities.databinding.FragmentErpBinding;
 
-public class HomeFragment extends Fragment
+public class ErpFragment extends Fragment
 {
-    private FragmentHomeBinding binding;
+    private FragmentErpBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        binding = FragmentHomeBinding.inflate(inflater, container, false);
+        binding = FragmentErpBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         return root;
     }

@@ -13,8 +13,8 @@
             android:icon="@drawable/ic_menu_csemoodle"
             android:title="@string/menu_moodle" />
         <item
-            android:id="@+id/nav_home"
+            android:id="@+id/nav_erp"
             android:icon="@drawable/ic_menu_csemoodle"
-            android:title="@string/menu_home" />
+            android:title="@string/menu_erp" />
     </group>
 </menu>

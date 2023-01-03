@@ -18,8 +18,8 @@
         tools:layout="@layout/fragment_moodle" />
 
     <fragment
-        android:id="@+id/nav_home"
-        android:name="com.example.iitkgputilities.ui.home.HomeFragment"
-        android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home" />
+        android:id="@+id/nav_erp"
+        android:name="com.example.iitkgputilities.ui.erp.ErpFragment"
+        android:label="@string/menu_erp"
+        tools:layout="@layout/fragment_erp" />
 </navigation>
