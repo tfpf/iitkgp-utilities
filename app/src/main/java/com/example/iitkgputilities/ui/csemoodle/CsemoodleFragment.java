@@ -1,4 +1,4 @@
-package com.example.iitkgputilities.ui.slideshow;
+package com.example.iitkgputilities.ui.csemoodle;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -14,17 +14,17 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.iitkgputilities.Constants;
 import com.example.iitkgputilities.MainActivity;
 import com.example.iitkgputilities.R;
-import com.example.iitkgputilities.databinding.FragmentSlideshowBinding;
+import com.example.iitkgputilities.databinding.FragmentCsemoodleBinding;
 
 import org.w3c.dom.Text;
 
-public class SlideshowFragment extends Fragment
+public class CsemoodleFragment extends Fragment
 {
-    private FragmentSlideshowBinding binding;
+    private FragmentCsemoodleBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        binding = FragmentSlideshowBinding.inflate(inflater, container, false);
+        binding = FragmentCsemoodleBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         return root;
     }

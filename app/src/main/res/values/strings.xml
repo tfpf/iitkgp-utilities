@@ -9,5 +9,5 @@
 
     <string name="menu_home">ERP</string>
     <string name="menu_gallery">Institute Moodle</string>
-    <string name="menu_slideshow">CSE Moodle</string>
+    <string name="menu_csemoodle">CSE Moodle</string>
 </resources>
