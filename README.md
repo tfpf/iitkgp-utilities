@@ -3,12 +3,12 @@ Android application which can be used to browse through the ERP and some LMS web
 Kharagpur. Login credentials are automatically filled in, so there is no need to remember your passwords.
 
 # Support
-Currently, the following websites have automatic login support.
-| Website          | Auto-login         |
-| :--------------: | :----------------: |
-| CSE Moodle       | :heavy_check_mark: |
-| Institute Moodle | :heavy_check_mark: |
-| ERP              | :white_check_mark: |
+Currently, the following websites are supported.
+| Website          | Auto-fill  | Auto-login  |
+| :--------------: | :--------: | :---------: |
+| CSE Moodle       | ✓          | ✓           |
+| Institute Moodle | ✓          | ✓           |
+| ERP              | ✓          |             |
 
 Android System WebView is used to display webpages, so browsing support really depends on how it renders the webpages.
 
