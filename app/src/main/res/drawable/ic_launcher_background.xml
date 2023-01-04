@@ -1,13 +1,28 @@
-<?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="oval">
-    <solid android:color="#27B4A6" />
-    <stroke android:width="1dp" android:color="#333333" />
-    <size android:width="80dp" android:height="80dp" />
-    <gradient
-        android:startColor="#27B4A6"
-        android:endColor="#006666"
-        android:centerX="40%"
-        android:centerY="40%"
-        android:gradientRadius="50%"
-        android:type="radial" />
-</shape>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <group android:scaleX="0.5427136"
+        android:scaleY="0.5427136">
+        <path
+            android:pathData="M0,0h199v199h-199z"
+            android:strokeWidth="0"
+            android:strokeColor="#333333">
+            <aapt:attr name="android:fillColor">
+                <gradient
+                    android:centerX="79.6"
+                    android:centerY="79.6"
+                    android:gradientRadius="99.5"
+                    android:type="radial">
+                    <item android:offset="0" android:color="#FF27B4A6"/>
+                    <item android:offset="1" android:color="#FF006666"/>
+                </gradient>
+            </aapt:attr>
+        </path>
+        <path
+            android:pathData="M115,42l-52,35l40,26l-25,49l45,-49l-40,-26z"
+            android:fillColor="#44BBBB"/>
+    </group>
+</vector>
